@@ -4,17 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
 {
    public class SellersController : Controller
    {
-      private readonly SellerService _sellerService;
+      private readonly SellerService _sellerService;              // Dependência
+      private readonly DepartmentService _departmentService;      // Dependência
 
-      public SellersController(SellerService sellerService)
+      public SellersController(SellerService sellerService, DepartmentService departmentService)
       {
-         _sellerService = sellerService;
+         _sellerService = sellerService;                 // Injeta a dependência no construtor
+         _departmentService = departmentService;         // Injeta a dependência no construtor
       }
 
       public IActionResult Index()                    // Ação do Controller
@@ -25,7 +28,9 @@ namespace SalesWebMvc.Controllers
 
       public IActionResult Create()
       {
-         return View();
+         var departments = _departmentService.FindAll();
+         var viewModel = new SellerFormViewModel { Departments = departments };
+         return View(viewModel);
       }
 
       [HttpPost]
