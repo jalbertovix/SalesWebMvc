@@ -1,0 +1,11 @@
+Github
+
+www.github.com
+
+Sequência:
+   git add .
+   [git status]  --> Opcional, só para visualizar se existem alterações ainda não comitadas
+   git commit -m "XXXXXXXXXXXXXX"
+   git push
+      Usuário: jalbertovix
+      Senha: j@s132477
